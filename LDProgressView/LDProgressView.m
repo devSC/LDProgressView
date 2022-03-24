@@ -149,7 +149,11 @@
 - (void)drawOuterStroke:(CGContextRef)context inRect:(CGRect)rect {
     float outerStrokeWidth = self.outerStrokeWidth.floatValue;
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(rect, outerStrokeWidth / 2, outerStrokeWidth / 2) cornerRadius:self.borderRadius.floatValue];
-    [self.color setStroke];
+    if (self.outerStrokeColor != nil) {
+        [self.outerStrokeColor setStroke];
+    } else {
+        [self.color setStroke];
+    }
     bezierPath.lineWidth = outerStrokeWidth;
     [bezierPath stroke];
 }
@@ -220,7 +224,11 @@
 - (void)drawStripes:(CGContextRef)context inRect:(CGRect)rect {
     CGContextSaveGState(context);
     [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:self.borderRadius.floatValue] addClip];
-    CGContextSetFillColorWithColor(context, [[UIColor whiteColor] colorWithAlphaComponent:0.2].CGColor);
+    UIColor *color = self.progressStripeColor;
+    if (color == nil) {
+        color = [[UIColor whiteColor] colorWithAlphaComponent:0.2];
+    }
+    CGContextSetFillColorWithColor(context, color.CGColor);
     CGFloat xStart = self.offset, height = rect.size.height, width = self.stripeWidth, y = rect.origin.y;
     while (xStart < rect.size.width) {
         CGContextSaveGState(context);
@@ -308,6 +316,9 @@
 }
 
 - (CGFloat)stripeWidth {
+    if (self.progressStripeWidth > 0) {
+        return self.progressStripeWidth;
+    }
     switch (self.type) {
         case LDProgressGradient:
             _stripeWidth = 15;

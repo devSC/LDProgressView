@@ -23,9 +23,12 @@ typedef NS_ENUM(NSInteger, LDAnimateDirection) {
 
 @property (nonatomic) CGFloat progress;
 @property (nonatomic) CGFloat labelProgress;
+@property (nonatomic) CGFloat progressStripeWidth;
 
 @property (nonatomic, strong) UIColor *color UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) UIColor *background UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *progressStripeColor UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) UIColor *outerStrokeColor UI_APPEARANCE_SELECTOR;
 
 @property (nonatomic, strong) NSNumber *flat UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) NSNumber *animate UI_APPEARANCE_SELECTOR;
@@ -37,6 +40,7 @@ typedef NS_ENUM(NSInteger, LDAnimateDirection) {
 @property (nonatomic, strong) NSNumber *outerStrokeWidth UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) NSNumber *progressInset UI_APPEARANCE_SELECTOR;
 @property (nonatomic, strong) NSNumber *borderRadius UI_APPEARANCE_SELECTOR;
+@property (nonatomic, strong) NSNumber *progressBorderRadius UI_APPEARANCE_SELECTOR;
 
 @property (nonatomic) NSTextAlignment textAlignment;
 @property (nonatomic) LDProgressType type;
